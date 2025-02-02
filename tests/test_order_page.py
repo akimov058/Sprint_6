@@ -1,9 +1,9 @@
 from pages.order_page import OrderPage
 import allure
 import pytest
+from data.base_page_data import BasePageData
 
 class TestOrderPage:
-    URL_MAIN_PAGE = 'https://qa-scooter.praktikum-services.ru/'
     TEXT_SUCCES_CREATE_ORDER = 'Отменить заказ'
 
     @pytest.mark.parametrize ("step1, step2", [
@@ -18,7 +18,7 @@ class TestOrderPage:
 ])
     @allure.title('Проверка заказа самоката')
     def test_order_scooter(self, step1, step2, driver):
-        driver.get(self.URL_MAIN_PAGE)
+        driver.get(BasePageData.URL_MAIN_PAGE)
         order_page = OrderPage(driver)
         order_page.click_button_order()
         order_page.set_abonent_data_step1(step1['name'],step1['last_name'],step1['address'],step1['phone'])
